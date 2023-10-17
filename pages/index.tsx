@@ -116,7 +116,9 @@ export default function Home() {
         {error == undefined &&
           (singleSubmitTriggered || pickerSubmitWasPressed) && (
             <>
-              <h2>Connecting...</h2>
+              <h2 className={styles.connecting}>
+                Connecting.<span>.</span><span>.</span>
+              </h2>
               <SelfSubmittingSsoForm ssoDetails={ssoDetails} />
             </>
           )}
