@@ -124,6 +124,20 @@ describe("Error paths", () => {
       cy.contains("Error: SAML Lambda response status");
     });
   });
+
+  it("gives an error page if the 'generateSaml' response contains a non-SUCCESS status", () => {
+    cy.intercept("POST", "**/oauth2/token", {
+      fixture: "token/oneCallCenter",
+    }).as("tokenFetch");
+    cy.intercept("GET", "**/generateSaml/*", {
+      fixture: "saml/error",
+    }).as("samlFetch");
+    cy.visit("/?code=123");
+    cy.wait("@tokenFetch");
+    cy.wait("@samlFetch");
+    cy.contains("Error:");
+    cy.contains("The system had an error");
+  });
 });
 
 // Prevent TypeScript from reading file as legacy script

@@ -106,7 +106,7 @@ export default function Home() {
       <main className={styles.main}>
         {error != undefined && (
           <>
-            <h2>Error: {error}</h2>
+            <h2>Error: {error.replace(/Error: /g, "")}</h2>
             <h3>
               Please contact your administrator with the above error message.
             </h3>
