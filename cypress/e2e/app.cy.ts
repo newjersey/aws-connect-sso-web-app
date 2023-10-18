@@ -39,10 +39,9 @@ describe("Happy paths", () => {
     }).as("tokenFetch");
     cy.intercept("GET", "**/generateSaml/*", {
       // Somehow there is some flakiness in checking for "Connecting" followed
-      // by the @samlPostToAws, so force a delay to ensure test consistency
-      // It might still be flaky anyway?!   :'(   >:E
+      // by the @samlPostToAws --> Force a delay to ensure test consistency :/
       fixture: "saml/basic",
-      delay: 500,
+      delay: 1000,
     }).as("samlFetch");
     cy.intercept("POST", "**/saml", {
       fixture: "postSamlFormPage",
