@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
-import { AWS_SAML_ENDPOINT } from "../api/constants";
-import { SsoDetails } from "../api/types";
+import { AWS_SAML_ENDPOINT } from "../pages/api/constants";
+import { SsoDetails } from "../pages/api/types";
 
 interface Props {
   ssoDetails: SsoDetails | undefined;

@@ -40,11 +40,23 @@
 }
 
 @keyframes fadeIn1 {
-     0%, 30% { opacity: 0 }
-    33%, 99% { opacity: 1 }
+  0%,
+  30% {
+    opacity: 0;
+  }
+  33%,
+  99% {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeIn2 {
-     0%, 64% { opacity: 0 }
-    67%, 99% { opacity: 1 }
+  0%,
+  64% {
+    opacity: 0;
+  }
+  67%,
+  99% {
+    opacity: 1;
+  }
 }

@@ -16,8 +16,8 @@ import {
   TokenResponse,
 } from "./api/types";
 import generateSaml from "./api/generateSaml";
-import CallCenterPicker from "./components/CallCenterPicker";
-import SelfSubmittingSsoForm from "./components/SelfSubmittingSsoForm";
+import CallCenterPicker from "../components/CallCenterPicker";
+import SelfSubmittingSsoForm from "../components/SelfSubmittingSsoForm";
 
 export default function Home() {
   const [idDetails, setIdDetails] = useState<IdDetails | undefined>(undefined);
@@ -41,7 +41,7 @@ export default function Home() {
       ).split("=")[1];
 
       // No authorizationCode? Go directly to the Hosted UI login page
-      if (authorizationCode == null) {
+      if (authorizationCode == null || authorizationCode === "") {
         window.location.replace(HOSTED_UI_LOGIN_URL);
       } else {
         if (!tokenFetchAlreadyRan.current) {
@@ -117,7 +117,8 @@ export default function Home() {
           (singleSubmitTriggered || pickerSubmitWasPressed) && (
             <>
               <h2 className={styles.connecting}>
-                Connecting.<span>.</span><span>.</span>
+                Connecting.<span>.</span>
+                <span>.</span>
               </h2>
               <SelfSubmittingSsoForm ssoDetails={ssoDetails} />
             </>

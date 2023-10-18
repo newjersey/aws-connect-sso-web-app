@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import generateSaml from "../api/generateSaml";
-import { SsoDetails } from "../api/types";
-import styles from "../../styles/Home.module.css";
+import generateSaml from "../pages/api/generateSaml";
+import { SsoDetails } from "../pages/api/types";
+import styles from "../styles/Home.module.css";
 
 interface Props {
   cognitoGroups: string[];
