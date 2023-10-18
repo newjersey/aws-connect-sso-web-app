@@ -9,13 +9,14 @@ import {
   HOSTED_UI_TOKEN_URL,
   REDIRECT_URI,
 } from "./api/constants";
+import extractUrlParameter from "./api/extractUrlParameter";
+import generateSaml from "./api/generateSaml";
 import {
   DecodedIdToken,
   IdDetails,
   SsoDetails,
   TokenResponse,
 } from "./api/types";
-import generateSaml from "./api/generateSaml";
 import CallCenterPicker from "../components/CallCenterPicker";
 import SelfSubmittingSsoForm from "../components/SelfSubmittingSsoForm";
 
@@ -33,12 +34,7 @@ export default function Home() {
   useEffect(() => {
     // ensure `document` is going to be defined
     if (typeof window !== "undefined") {
-      const authorizationCode = (
-        document.location.search
-          .substring(1)
-          .split("&")
-          .find((s) => s.match(/^code=/)) ?? ""
-      ).split("=")[1];
+      const authorizationCode = extractUrlParameter("code");
 
       // No authorizationCode? Go directly to the Hosted UI login page
       if (authorizationCode == null || authorizationCode === "") {
@@ -135,8 +131,8 @@ export default function Home() {
             <CallCenterPicker
               cognitoGroups={idDetails.groups}
               idToken={idDetails.token}
-              pickerWasPressed={pickerSubmitWasPressed}
-              setPickerWasPressed={setPickerSubmitWasPressed}
+              hasBeenClicked={pickerSubmitWasPressed}
+              setHasBeenClicked={setPickerSubmitWasPressed}
               setSsoDetails={setSsoDetails}
               setError={setError}
             />

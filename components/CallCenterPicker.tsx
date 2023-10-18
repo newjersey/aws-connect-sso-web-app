@@ -6,8 +6,8 @@ import styles from "../styles/Home.module.css";
 interface Props {
   cognitoGroups: string[];
   idToken: string;
-  pickerWasPressed: boolean;
-  setPickerWasPressed: React.Dispatch<React.SetStateAction<boolean>>;
+  hasBeenClicked: boolean;
+  setHasBeenClicked: React.Dispatch<React.SetStateAction<boolean>>;
   setSsoDetails: React.Dispatch<React.SetStateAction<SsoDetails | undefined>>;
   setError: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
@@ -18,24 +18,24 @@ interface Props {
  *
  * @param cognitoGroups The groups (call centers) this user belongs to
  * @param idToken User's Cognito token necessary for calling `generateSaml`
- * @param pickerWasPressed Boolean state variable whether this picker has been
+ * @param hasBeenClicked Boolean state variable whether this picker has been
  * clicked/submitted
- * @param setPickerWasPressed Setter for the above state variable
+ * @param setHasBeenClicked Setter for the above state variable
  * @param setSsoDetails Setter for the output of `generateSaml`
  * @param setError Setter in case there are errors while calling `generateSaml`
  */
 export default function CallCenterPicker({
   cognitoGroups,
   idToken,
-  pickerWasPressed,
-  setPickerWasPressed,
+  hasBeenClicked,
+  setHasBeenClicked,
   setSsoDetails,
   setError,
 }: Props) {
   const [currentPick, setCurrentPick] = useState<string | undefined>(undefined);
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const onRadioGroupSubmit = () => {
-    setPickerWasPressed(true);
+    setHasBeenClicked(true);
     generateSaml(currentPick!, idToken)
       .then((output) => setSsoDetails(output))
       .catch((error) => setError(error.toString()));
@@ -43,8 +43,8 @@ export default function CallCenterPicker({
 
   // Should be disabled when there's no current pick yet OR the button was pressed
   useEffect(() => {
-    setButtonDisabled(pickerWasPressed || currentPick == undefined);
-  }, [pickerWasPressed, currentPick]);
+    setButtonDisabled(hasBeenClicked || currentPick == undefined);
+  }, [hasBeenClicked, currentPick]);
 
   return (
     <>

@@ -26,9 +26,9 @@ export default function SelfSubmittingSsoForm({ ssoDetails }: Props) {
   useEffect(() => {
     if (
       samlResponseRef.current?.value != null &&
-      samlResponseRef.current?.value?.length > 0 &&
+      samlResponseRef.current.value.length > 0 &&
       relayStateRef.current?.value != null &&
-      relayStateRef.current?.value.length > 0
+      relayStateRef.current.value.length > 0
     ) {
       formRef.current?.submit();
     }
