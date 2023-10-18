@@ -82,7 +82,48 @@ describe("Happy paths", () => {
 });
 
 describe("Error paths", () => {
-  it("TODO", () => {});
+  [400, 500].forEach((statusCode) => {
+    it(`gives an error page when the token-fetch returns an error status: ${statusCode}`, () => {
+      cy.intercept("POST", "**/oauth2/token", {
+        statusCode,
+      }).as("tokenFetch");
+      cy.visit("/?code=123");
+      cy.wait("@tokenFetch");
+      cy.contains("Error");
+      cy.contains("Have you tried logging in again");
+    });
+
+    it(`gives an error page when the single call center 'generateSaml' invocation returns an error status: ${statusCode}`, () => {
+      cy.intercept("POST", "**/oauth2/token", {
+        fixture: "token/oneCallCenter",
+      }).as("tokenFetch");
+      cy.intercept("GET", "**/generateSaml/*", {
+        statusCode,
+      }).as("samlFetch");
+      cy.visit("/?code=123");
+      cy.wait("@tokenFetch");
+      cy.wait("@samlFetch");
+      cy.contains("Error: SAML Lambda response status");
+    });
+
+    it(`gives an error page when the multi call center 'generateSaml' invocation returns an error status: ${statusCode}`, () => {
+      cy.intercept("POST", "**/oauth2/token", {
+        fixture: "token/threeCallCenters",
+      }).as("tokenFetch");
+      cy.intercept("GET", "**/generateSaml/*", {
+        statusCode,
+      }).as("samlFetch");
+      cy.visit("/?code=123");
+      cy.wait("@tokenFetch");
+
+      cy.contains("Choose a Call Center");
+      cy.get("input").parent("div").contains("callcenter1").click();
+      cy.get("button").click();
+
+      cy.wait("@samlFetch");
+      cy.contains("Error: SAML Lambda response status");
+    });
+  });
 });
 
 // Prevent TypeScript from reading file as legacy script
