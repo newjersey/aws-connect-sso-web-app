@@ -21,7 +21,7 @@ This site relies on some environment variables:
 
   The base URL for the Hosted UI Cognito sign-in page associated with this
   UserPool's application (the current working UserPool is "_Cognito for Connect
-  Call Centers_" (ID: _us-east-1*jKQHCtx7s_) and the "App integration" client is
+  Call Centers_" (ID: *us-east-1_jKQHCtx7s*) and the "App integration" client is
   "_ReactAppClient_")
 
 - `NEXT_PUBLIC_COGNITO_CLIENT_ID`
