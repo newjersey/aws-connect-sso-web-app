@@ -47,7 +47,7 @@ export default function Home() {
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams({
               grant_type: "authorization_code",
-              client_id: CLIENT_ID!,
+              client_id: CLIENT_ID,
               redirect_uri: REDIRECT_URI,
               code: authorizationCode,
             }),
