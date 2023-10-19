@@ -15,9 +15,10 @@
  */
 export default function extractUrlParameter(paramName: string) {
   const paramMatcher = new RegExp(`^${paramName}=`);
-  return (document.location.search
-          .substring(1)
-          .split("&")
-          .find((s) => s.match(paramMatcher)) ?? ""
-      ).split("=")[1];
+  return (
+    document.location.search
+      .substring(1)
+      .split("&")
+      .find((s) => s.match(paramMatcher)) ?? ""
+  ).split("=")[1];
 }

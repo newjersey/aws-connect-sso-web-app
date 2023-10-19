@@ -11,36 +11,38 @@ two clicks) get federated and logged in to their desired Connect instance.
 ## Configuration
 
 This site relies on some environment variables:
-* `NEXT_PUBLIC_SAML_GENERATION_URL`
+
+- `NEXT_PUBLIC_SAML_GENERATION_URL`
 
   The URL for the APIGateway connection to the SAML Response generating Lambda
   mentioned above
 
-* `NEXT_PUBLIC_COGNITO_HOSTED_UI_URL`
+- `NEXT_PUBLIC_COGNITO_HOSTED_UI_URL`
 
   The base URL for the Hosted UI Cognito sign-in page associated with this
   UserPool's application (the current working UserPool is "_Cognito for Connect
-  Call Centers_" (ID: us-east-1_jKQHCtx7s) and the "App integration" client is
+  Call Centers_" (ID: _us-east-1*jKQHCtx7s_) and the "App integration" client is
   "_ReactAppClient_")
 
-* `NEXT_PUBLIC_COGNITO_CLIENT_ID`
+- `NEXT_PUBLIC_COGNITO_CLIENT_ID`
 
-  The Client ID of the App Integration - App Client ("_ReactAppClient_")
+  The Client ID of the App Integration - App Client (from the "_ReactAppClient_"
+  client)
 
-* `NEXT_PUBLIC_COGNITO_REDIRECT_URI`
+- `NEXT_PUBLIC_COGNITO_REDIRECT_URI`
 
-  The URL of this web app.
+  The URL of this web app
 
   **Note:** This must be configured here as well as inside Cognito, in the
   UserPool, in the App client, under "_Hosted UI_", under "_Allowed callback
   URLs_"
 
-* `NEXT_PUBLIC_SSO_DEFAULT_DURATION`
+- `NEXT_PUBLIC_SSO_DEFAULT_DURATION`
 
-  The session duration to use for the SSO session requested by the SAML (in
-  seconds)
+  The session duration to use for the SSO session requested by the generated
+  SAML (in seconds)
 
-* `NEXT_PUBLIC_AWS_SAML_ENDPOINT`
+- `NEXT_PUBLIC_AWS_SAML_ENDPOINT`
 
   The SAML endpoint for Connect SSO sessions (should be
   "https://signin.aws.amazon.com/saml")
