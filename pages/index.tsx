@@ -9,7 +9,6 @@ import {
   HOSTED_UI_TOKEN_URL,
   REDIRECT_URI,
 } from "./api/constants";
-import extractUrlParameter from "./api/extractUrlParameter";
 import generateSaml from "./api/generateSaml";
 import {
   DecodedIdToken,
@@ -34,7 +33,8 @@ export default function Home() {
   useEffect(() => {
     // ensure `document` is going to be defined
     if (typeof window !== "undefined") {
-      const authorizationCode = extractUrlParameter("code");
+      const searchParameters = new URLSearchParams(document.location.search.substring(1));
+      const authorizationCode = searchParameters.get("code");
 
       // No authorizationCode? Go directly to the Hosted UI login page
       if (authorizationCode == null || authorizationCode === "") {

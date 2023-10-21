@@ -61,7 +61,7 @@ export default function CallCenterPicker({
       <div>
         <button
           className={styles.button}
-          disabled={hasBeenClicked || currentPick == undefined}
+          disabled={currentPick == undefined || hasBeenClicked}
           onClick={onRadioGroupSubmit}
         >
           Connect

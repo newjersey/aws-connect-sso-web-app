@@ -6,14 +6,12 @@ describe("Initial navigation", () => {
       );
       cy.visit(basePath);
 
-      cy.location().then((_location) => {
-        cy.wait("@loginRedirect").then((interceptor) => {
-          const queryKeys = Object.keys(interceptor.request.query);
-          expect(queryKeys).contains("client_id");
-          expect(queryKeys).contains("redirect_uri");
-          expect(queryKeys).contains("response_type");
-          expect(queryKeys).contains("scope");
-        });
+      cy.wait("@loginRedirect").then((interceptor) => {
+        const queryKeys = Object.keys(interceptor.request.query);
+        expect(queryKeys).contains("client_id");
+        expect(queryKeys).contains("redirect_uri");
+        expect(queryKeys).contains("response_type");
+        expect(queryKeys).contains("scope");
       });
 
       cy.origin("https://example.com", () => {
@@ -24,6 +22,19 @@ describe("Initial navigation", () => {
 });
 
 describe("Happy paths", () => {
+  it("uses the 'code' query parameter as the 'code' body parameter in a token fetch request", () => {
+    cy.intercept("POST", "**/oauth2/token", {
+      fixture: "token/noCallCenters",
+    }).as("tokenFetch");
+
+    cy.visit("/?code=abc123");
+    cy.wait("@tokenFetch").then((interceptor) => {
+      console.log(interceptor.request.body);
+      const bodyParams = new URLSearchParams(interceptor.request.body);
+      expect(bodyParams.get("code")).equals("abc123");
+    });
+  }) ;
+
   it("shows an error if the user has no configured call centers", () => {
     cy.intercept("POST", "**/oauth2/token", {
       fixture: "token/noCallCenters",
