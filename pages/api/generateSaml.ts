@@ -1,4 +1,3 @@
-import fetch from "node-fetch";
 import { DEFAULT_DURATION, SAML_GENERATION_URL } from "./constants";
 import { GetSamlResponse, SsoDetails } from "./types";
 

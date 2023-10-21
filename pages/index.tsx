@@ -1,6 +1,5 @@
 import * as jwt from "jsonwebtoken";
 import Head from "next/head";
-import fetch from "node-fetch";
 import React, { useEffect, useRef, useState } from "react";
 import CallCenterPicker from "../components/CallCenterPicker";
 import SelfSubmittingSsoForm from "../components/SelfSubmittingSsoForm";
