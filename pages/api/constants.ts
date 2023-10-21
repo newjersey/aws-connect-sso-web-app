@@ -1,6 +1,6 @@
 export const SAML_GENERATION_URL = process.env.NEXT_PUBLIC_SAML_GENERATION_URL;
 export const CLIENT_ID = process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID!;
-export const REDIRECT_URI = process.env.NEXT_PUBLIC_COGNITO_REDIRECT_URI || "";
+export const REDIRECT_URI = process.env.NEXT_PUBLIC_COGNITO_REDIRECT_URI!;
 const HOSTED_UI_URL = process.env.NEXT_PUBLIC_COGNITO_HOSTED_UI_URL;
 export const HOSTED_UI_TOKEN_URL = `${HOSTED_UI_URL}/oauth2/token`;
 export const HOSTED_UI_LOGIN_URL =

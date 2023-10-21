@@ -33,18 +33,12 @@ export default function CallCenterPicker({
   setError,
 }: Props) {
   const [currentPick, setCurrentPick] = useState<string | undefined>(undefined);
-  const [buttonDisabled, setButtonDisabled] = useState(true);
   const onRadioGroupSubmit = () => {
     setHasBeenClicked(true);
     generateSaml(currentPick!, idToken)
       .then((output) => setSsoDetails(output))
       .catch((error) => setError(error.toString()));
   };
-
-  // Should be disabled when there's no current pick yet OR the button was pressed
-  useEffect(() => {
-    setButtonDisabled(hasBeenClicked || currentPick == undefined);
-  }, [hasBeenClicked, currentPick]);
 
   return (
     <>
@@ -67,7 +61,7 @@ export default function CallCenterPicker({
       <div>
         <button
           className={styles.button}
-          disabled={buttonDisabled}
+          disabled={hasBeenClicked || currentPick == undefined}
           onClick={onRadioGroupSubmit}
         >
           Connect

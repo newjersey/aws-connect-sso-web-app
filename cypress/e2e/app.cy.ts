@@ -33,15 +33,29 @@ describe("Happy paths", () => {
     cy.contains("Error");
   });
 
-  it("generates and submits SAML if the user has one configured call center", () => {
+  it("automatically reaches a 'Connecting' page when a user has one configured call center", () => {
     cy.intercept("POST", "**/oauth2/token", {
       fixture: "token/oneCallCenter",
     }).as("tokenFetch");
     cy.intercept("GET", "**/generateSaml/*", {
-      // Somehow there is some flakiness in checking for "Connecting" followed
-      // by the @samlPostToAws --> Force a delay to ensure test consistency :/
       fixture: "saml/basic",
-      delay: 1000,
+      delay: 5000,
+    });
+    cy.intercept("POST", "**/saml", {
+      fixture: "postSamlFormPage",
+    });
+
+    cy.visit("/?code=123");
+    cy.wait("@tokenFetch");
+    cy.contains("Connecting");
+  });
+
+  it("automatically generates and POSTs SAML if the user has one configured call center", () => {
+    cy.intercept("POST", "**/oauth2/token", {
+      fixture: "token/oneCallCenter",
+    }).as("tokenFetch");
+    cy.intercept("GET", "**/generateSaml/*", {
+      fixture: "saml/basic",
     }).as("samlFetch");
     cy.intercept("POST", "**/saml", {
       fixture: "postSamlFormPage",
@@ -49,14 +63,12 @@ describe("Happy paths", () => {
 
     cy.visit("/?code=123");
     cy.wait("@tokenFetch");
-    cy.contains("Connecting");
-
     cy.wait("@samlFetch");
     cy.wait("@samlPostToAws");
     cy.contains("You POSTed the SAML details");
   });
 
-  it("loads the call center picker if the user has multiple call centers configured and submits SAML when one call center is picked", () => {
+  it("loads the call center picker if the user has multiple call centers configured, POSTs SAML when one call center is picked", () => {
     cy.intercept("POST", "**/oauth2/token", {
       fixture: "token/threeCallCenters",
     }).as("tokenFetch");

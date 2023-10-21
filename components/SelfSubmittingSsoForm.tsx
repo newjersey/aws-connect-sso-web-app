@@ -43,13 +43,13 @@ export default function SelfSubmittingSsoForm({ ssoDetails }: Props) {
     >
       <input
         name="SAMLResponse"
-        value={ssoDetails?.SAMLResponse || ""}
+        value={ssoDetails?.SAMLResponse ?? ""}
         type="hidden"
         ref={samlResponseRef}
       />
       <input
         name="RelayState"
-        value={ssoDetails?.RelayState || ""}
+        value={ssoDetails?.RelayState ?? ""}
         type="hidden"
         ref={relayStateRef}
       />
