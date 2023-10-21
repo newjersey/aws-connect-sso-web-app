@@ -41,3 +41,9 @@ export interface GetSamlResponse {
   relayState: string;
   error: string;
 }
+
+export enum CallCenterSubmitState {
+  IDLE,
+  USER_SUBMITTED,
+  AUTO_TRIGGERED,
+}

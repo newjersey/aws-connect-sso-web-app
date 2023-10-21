@@ -22,23 +22,21 @@ export default async function generateSaml(
     },
   )
     .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
+      if (!response.ok) {
         throw new Error(`SAML Lambda response status: ${response.status}`);
       }
+      return response.json();
     })
     .then((response: GetSamlResponse) => {
-      if (response.status === "SUCCESS") {
-        return {
-          SAMLResponse: response.samlResponse,
-          RelayState: response.relayState,
-        };
-      } else {
+      if (response.status !== "SUCCESS") {
         throw new Error(`Issues fetching SAML Response: ${response.error}`);
       }
+      return {
+        SAMLResponse: response.samlResponse,
+        RelayState: response.relayState,
+      };
     })
     .catch((error) => {
-      throw new Error(error.toString());
+      throw new Error(error.message);
     });
 }
