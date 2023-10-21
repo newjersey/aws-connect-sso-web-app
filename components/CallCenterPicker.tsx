@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import generateSaml from "../pages/api/generateSaml";
-import {CallCenterSubmitState, SsoDetails} from "../pages/api/types";
+import { CallCenterSubmitState, SsoDetails } from "../pages/api/types";
 import styles from "../styles/Home.module.css";
 
 interface Props {
@@ -61,7 +61,10 @@ export default function CallCenterPicker({
       <div>
         <button
           className={styles.button}
-          disabled={currentPick == undefined || submitState === CallCenterSubmitState.USER_SUBMITTED}
+          disabled={
+            currentPick == undefined ||
+            submitState === CallCenterSubmitState.USER_SUBMITTED
+          }
           onClick={onRadioGroupSubmit}
         >
           Connect

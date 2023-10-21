@@ -1,13 +1,24 @@
 import * as jwt from "jsonwebtoken";
 import Head from "next/head";
 import fetch from "node-fetch";
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import CallCenterPicker from "../components/CallCenterPicker";
 import SelfSubmittingSsoForm from "../components/SelfSubmittingSsoForm";
 import styles from "../styles/Home.module.css";
-import {CLIENT_ID, HOSTED_UI_LOGIN_URL, HOSTED_UI_TOKEN_URL, REDIRECT_URI,} from "./api/constants";
+import {
+  CLIENT_ID,
+  HOSTED_UI_LOGIN_URL,
+  HOSTED_UI_TOKEN_URL,
+  REDIRECT_URI,
+} from "./api/constants";
 import generateSaml from "./api/generateSaml";
-import {CallCenterSubmitState, DecodedIdToken, IdDetails, SsoDetails, TokenResponse,} from "./api/types";
+import {
+  CallCenterSubmitState,
+  DecodedIdToken,
+  IdDetails,
+  SsoDetails,
+  TokenResponse,
+} from "./api/types";
 
 export default function Home() {
   const [idDetails, setIdDetails] = useState<IdDetails | undefined>(undefined);
@@ -22,13 +33,14 @@ export default function Home() {
   useEffect(() => {
     // ensure `document` is going to be defined
     if (typeof window === "object") {
-      const searchParameters = new URLSearchParams(document.location.search.substring(1));
+      const searchParameters = new URLSearchParams(
+        document.location.search.substring(1),
+      );
       const authorizationCode = searchParameters.get("code");
 
       // No authorizationCode? Go directly to the Hosted UI login page
       if (authorizationCode == null || authorizationCode === "") {
         window.location.replace(HOSTED_UI_LOGIN_URL);
-
       } else if (!tokenFetchAlreadyRan.current) {
         tokenFetchAlreadyRan.current = true;
         fetch(HOSTED_UI_TOKEN_URL, {
@@ -97,19 +109,21 @@ export default function Home() {
         )}
 
         {error == undefined && submitState !== CallCenterSubmitState.IDLE && (
-            <>
-              <h2 className={styles.connecting}>
-                Connecting.<span>.</span>
-                <span>.</span>
-              </h2>
-              <SelfSubmittingSsoForm ssoDetails={ssoDetails} />
-            </>
-          )}
+          <>
+            <h2 className={styles.connecting}>
+              Connecting.<span>.</span>
+              <span>.</span>
+            </h2>
+            <SelfSubmittingSsoForm ssoDetails={ssoDetails} />
+          </>
+        )}
 
-        {error == undefined && submitState === CallCenterSubmitState.IDLE &&
+        {error == undefined &&
+          submitState === CallCenterSubmitState.IDLE &&
           idDetails == undefined && <div className={styles.loader}></div>}
 
-        {error == undefined && submitState === CallCenterSubmitState.IDLE &&
+        {error == undefined &&
+          submitState === CallCenterSubmitState.IDLE &&
           idDetails != undefined &&
           idDetails.groups?.length > 1 && (
             <CallCenterPicker
@@ -122,7 +136,8 @@ export default function Home() {
             />
           )}
 
-        {error == undefined && submitState === CallCenterSubmitState.IDLE &&
+        {error == undefined &&
+          submitState === CallCenterSubmitState.IDLE &&
           idDetails != undefined &&
           (idDetails.groups == undefined || idDetails.groups.length === 0) && (
             <>

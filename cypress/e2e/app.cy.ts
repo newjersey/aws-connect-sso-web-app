@@ -29,11 +29,10 @@ describe("Happy paths", () => {
 
     cy.visit("/?code=abc123");
     cy.wait("@tokenFetch").then((interceptor) => {
-      console.log(interceptor.request.body);
       const bodyParams = new URLSearchParams(interceptor.request.body);
       expect(bodyParams.get("code")).equals("abc123");
     });
-  }) ;
+  });
 
   it("shows an error if the user has no configured call centers", () => {
     cy.intercept("POST", "**/oauth2/token", {
