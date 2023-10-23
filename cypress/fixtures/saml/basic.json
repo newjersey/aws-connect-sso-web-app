@@ -1,0 +1,6 @@
+{
+  "status": "SUCCESS",
+  "samlResponse": "saml",
+  "relayState": "https://example.com",
+  "error": ""
+}
