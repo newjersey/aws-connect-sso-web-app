@@ -21,12 +21,12 @@ This site relies on some environment variables:
 
   The base URL for the Hosted UI Cognito sign-in page associated with this
   UserPool's application (the current working UserPool is "_Cognito for Connect
-  Call Centers_" (ID: _us-east-1_jKQHCtx7s_) and the "App integration" client is
-  "_ReactAppClient_")
+  Call Centers_" (ID: _us-east-1_AZyvZQdFN_) and the "App integration" client is
+  "_Amplify App_")
 
 - `NEXT_PUBLIC_COGNITO_CLIENT_ID`
 
-  The Client ID of the App Integration - App Client (from the "_ReactAppClient_"
+  The Client ID of the App Integration - App Client (from the "_Amplify App_"
   client)
 
 - `NEXT_PUBLIC_COGNITO_REDIRECT_URI`

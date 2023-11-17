@@ -44,7 +44,7 @@ export default function CallCenterPicker({
     <>
       <h2>Choose a Call Center to connect to:</h2>
       <div>
-        {cognitoGroups.map((group: string) => (
+        {cognitoGroups.sort().map((group: string) => (
           <div key={group}>
             <input
               type="radio"
