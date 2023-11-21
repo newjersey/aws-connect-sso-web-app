@@ -94,6 +94,10 @@ describe("Happy paths", () => {
       fixture: "postSamlFormPage",
     }).as("samlPostToAws");
 
+    cy.contains("callcenter1");
+    cy.contains("callcenter2");
+    cy.contains("callcenter3");
+
     cy.get("input").parent("div").contains("callcenter1").click();
     cy.get("button").should("not.be.disabled");
     cy.get("button").click();
