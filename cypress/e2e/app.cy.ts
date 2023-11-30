@@ -1,10 +1,12 @@
+const BASE_PATH = "/app/callcenters";
+
 describe("Initial navigation", () => {
-  ["/", "/?cold=123", "/?code="].forEach((basePath) => {
-    it(`should send you to the Hosted UI if 'code' is not a parameter (url: '${basePath}')`, () => {
+  ["", "cold=123", "code="].forEach((params) => {
+    it(`should send you to the Hosted UI if 'code' is not a parameter (params: '${params}')`, () => {
       cy.intercept({ pathname: "/login" }, { fixture: "hostedUiLoginPage" }).as(
         "loginRedirect",
       );
-      cy.visit(basePath);
+      cy.visit(`${BASE_PATH}/?${params}`);
 
       cy.wait("@loginRedirect").then((interceptor) => {
         const queryKeys = Object.keys(interceptor.request.query);
@@ -27,7 +29,7 @@ describe("Happy paths", () => {
       fixture: "token/noCallCenters",
     }).as("tokenFetch");
 
-    cy.visit("/?code=abc123");
+    cy.visit(`${BASE_PATH}/?code=abc123`);
     cy.wait("@tokenFetch").then((interceptor) => {
       const bodyParams = new URLSearchParams(interceptor.request.body);
       expect(bodyParams.get("code")).equals("abc123");
@@ -38,7 +40,7 @@ describe("Happy paths", () => {
     cy.intercept("POST", "**/oauth2/token", {
       fixture: "token/noCallCenters",
     }).as("tokenFetch");
-    cy.visit("/?code=123");
+    cy.visit(`${BASE_PATH}/?code=123`);
     cy.wait("@tokenFetch");
     cy.contains("Error");
   });
@@ -55,7 +57,7 @@ describe("Happy paths", () => {
       fixture: "postSamlFormPage",
     });
 
-    cy.visit("/?code=123");
+    cy.visit(`${BASE_PATH}/?code=123`);
     cy.wait("@tokenFetch");
     cy.contains("Connecting");
   });
@@ -71,7 +73,7 @@ describe("Happy paths", () => {
       fixture: "postSamlFormPage",
     }).as("samlPostToAws");
 
-    cy.visit("/?code=123");
+    cy.visit(`${BASE_PATH}/?code=123`);
     cy.wait("@tokenFetch");
     cy.wait("@samlFetch");
     cy.wait("@samlPostToAws");
@@ -82,7 +84,7 @@ describe("Happy paths", () => {
     cy.intercept("POST", "**/oauth2/token", {
       fixture: "token/threeCallCenters",
     }).as("tokenFetch");
-    cy.visit("/?code=123");
+    cy.visit(`${BASE_PATH}/?code=123`);
     cy.wait("@tokenFetch");
     cy.contains("Choose a Call Center");
     cy.get("button").should("be.disabled");
@@ -113,7 +115,7 @@ describe("Error paths", () => {
       cy.intercept("POST", "**/oauth2/token", {
         statusCode,
       }).as("tokenFetch");
-      cy.visit("/?code=123");
+      cy.visit(`${BASE_PATH}/?code=123`);
       cy.wait("@tokenFetch");
       cy.contains("Error");
       cy.contains("Have you tried logging in again");
@@ -126,7 +128,7 @@ describe("Error paths", () => {
       cy.intercept("GET", "**/generateSaml/*", {
         statusCode,
       }).as("samlFetch");
-      cy.visit("/?code=123");
+      cy.visit(`${BASE_PATH}/?code=123`);
       cy.wait("@tokenFetch");
       cy.wait("@samlFetch");
       cy.contains("Error: SAML Lambda response status");
@@ -139,7 +141,7 @@ describe("Error paths", () => {
       cy.intercept("GET", "**/generateSaml/*", {
         statusCode,
       }).as("samlFetch");
-      cy.visit("/?code=123");
+      cy.visit(`${BASE_PATH}/?code=123`);
       cy.wait("@tokenFetch");
 
       cy.contains("Choose a Call Center");
@@ -158,7 +160,7 @@ describe("Error paths", () => {
     cy.intercept("GET", "**/generateSaml/*", {
       fixture: "saml/error",
     }).as("samlFetch");
-    cy.visit("/?code=123");
+    cy.visit(`${BASE_PATH}/?code=123`);
     cy.wait("@tokenFetch");
     cy.wait("@samlFetch");
     cy.contains("Error:");
