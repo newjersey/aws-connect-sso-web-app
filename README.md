@@ -20,9 +20,9 @@ This site relies on some environment variables:
 - `NEXT_PUBLIC_COGNITO_HOSTED_UI_URL`
 
   The base URL for the Hosted UI Cognito sign-in page associated with this
-  UserPool's application (the current working UserPool is "_Cognito for Connect
-  Call Centers_" (ID: _us-east-1_AZyvZQdFN_) and the "App integration" client is
-  "_Amplify App_")
+  User Pool's application (the current working User Pool is "_Cognito for
+  Connect Call Centers_" (ID: _us-east-1_AZyvZQdFN_) and the "App integration"
+  client is "_Amplify App_")
 
 - `NEXT_PUBLIC_COGNITO_CLIENT_ID`
 
@@ -34,8 +34,9 @@ This site relies on some environment variables:
   The URL of this web app
 
   **Note:** This must be configured here as well as inside Cognito, in the
-  UserPool, in the App client, under "_Hosted UI_", under "_Allowed callback
-  URLs_"
+  User Pool, in the App client, under "_Hosted UI_", under "_Allowed callback
+  URLs_", and it should also be reflected in the Invitation Message under
+  "_Messaging_"
 
 - `NEXT_PUBLIC_SSO_DEFAULT_DURATION`
 
@@ -51,3 +52,6 @@ This site relies on some environment variables:
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with
 [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+See [The Inside Story](docs/THE_INSIDE_STORY.md) for more information about all
+the random hurdles and gotchas that were overcome in order to get this working.
