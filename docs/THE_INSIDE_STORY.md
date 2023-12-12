@@ -38,7 +38,7 @@ user to manually submit a form, a
 [Self Submitting Form](../components/SelfSubmittingSsoForm.tsx) is used (also
 using hidden inputs so the user doesn't have to see anything confusing either).
 
-ASIDE: It is not useful for this work now, but an earlier draft (without the
+**ASIDE**: It is not useful for this work now, but an earlier draft (without the
 need for a frontend with a call center picker) relied on a Lambda response with
 content type `text/html` and an embedded self-submitting form as the body, like
 this:
