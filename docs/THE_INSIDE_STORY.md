@@ -97,7 +97,7 @@ configuring:
 Once the setup is complete, Cognito can be configured to use the verified email
 address as the "FROM Email Address" by editing "Email" on the Messaging tab in
 the User Pool. An optional "FROM Sender Name" can also be configured, such as
-"New Jersey Call Centers <callcenters@innovation.nj.gov>".
+"New Jersey Call Centers \<callcenters@innovation.nj.gov>".
 
 Special thanks to the New Jersey Cyber Communication & Integration Cell (NJCCIC)
 and AWS support engineers who helped us figure out how to set this up.
