@@ -150,8 +150,6 @@ the Messaging page with advice for the steps necessary to set up SMS. For this
 confusing UI, I believe an AWS support engineer did submit a request to change
 it so the info box goes away when everything is correctly configured.
 
-Where to configure the base URL
-
 ## Multiple truth sources
 
 Unfortunately with the way the code ended up in two repos and with the different
