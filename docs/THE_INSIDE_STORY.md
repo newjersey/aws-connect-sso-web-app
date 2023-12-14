@@ -21,8 +21,8 @@ changes.
 ## Generating (and handling) a valid SAML Response
 
 As described in the README for Custom AWS IDP, there was a lot of difficulty
-generating a valid, signed SAML Response which AWS could consume. As well,
-getting it all pieced together correctly took learning new things.
+generating a valid, signed SAML Response which AWS could consume. Also, getting
+it all pieced together correctly took learning new things.
 
 It turns out that SAML-based SSO seems to lean heavily on browsers to do a lot
 of correct handling and redirecting. This happens after the SAML Response is
@@ -57,12 +57,12 @@ I thought that was cool enough to keep around even though we are not using it.
 ## Setting up emails
 
 We wanted to set up Cognito's *Messaging* configuration so that users would be
-able to get an invitation-email with their first (temporary) password and also
+able to get an invitation email with their first (temporary) password and also
 so that users could receive emails to help for forgotten-password resets. As it
 turned out, this was much harder than it seemed, requiring enough understanding
-of email security and the AWS Email Service (SES) to get to the point where
-emails could at least reach their destination without being bounced or dropped,
-even though under V1, emails still end up in state junk folders.
+of email security and the Simple Email Service to get to the point where emails
+could at least reach their destination without being bounced or dropped, even
+though under V1, emails still end up in state junk folders.
 
 ### DMARC = DKIM + SPF
 
