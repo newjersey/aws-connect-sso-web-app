@@ -32,7 +32,7 @@ export default function SelfSubmittingSsoForm({ ssoDetails }: Props) {
     ) {
       formRef.current?.submit();
     }
-  }, [samlResponseRef.current?.value, relayStateRef.current?.value]);
+  }, [ssoDetails]);
 
   return (
     <form

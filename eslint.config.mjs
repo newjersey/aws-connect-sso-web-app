@@ -1,7 +1,8 @@
 import nextTypescript from "eslint-config-next/typescript";
 import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
 
-export default [
+/** @type {import("eslint").Linter.Config[]} */
+const eslintConfig = [
   ...nextTypescript,
   ...nextCoreWebVitals,
   {
@@ -14,3 +15,5 @@ export default [
     ],
   },
 ];
+
+export default eslintConfig;
