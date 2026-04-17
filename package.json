@@ -16,21 +16,21 @@
     "test:e2e:headless": "cypress run --e2e --browser=chrome"
   },
   "dependencies": {
-    "jsonwebtoken": "9.0.2",
+    "jsonwebtoken": "9.0.3",
     "next": "16.2.4",
     "react": "19.2.5",
     "react-dom": "19.2.5"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "9.0.3",
-    "@types/node": "20.8.6",
+    "@types/jsonwebtoken": "9.0.10",
+    "@types/node": "22.19.17",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "cypress": "13.16.1",
-    "eslint": "9.25.1",
+    "cypress": "15.14.0",
+    "eslint": "9.39.4",
     "eslint-config-next": "16.2.4",
-    "prettier": "3.0.3",
-    "typescript": "5.2.2"
+    "prettier": "3.8.3",
+    "typescript": "6.0.3"
   },
   "overrides": {
     "@types/react": "19.2.14",
