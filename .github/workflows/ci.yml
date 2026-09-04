@@ -1,4 +1,6 @@
 name: Automated testing
+permissions:
+  contents: read
 
 on:
   push:
